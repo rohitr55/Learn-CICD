@@ -3,7 +3,11 @@ pipeline {
 
     parameters {
         string(name: 'URL', description: 'URL to open')
-        string(name: 'TEXT', description: 'text to verify')
+        string(name: 'TEXT', description: 'Text to verify')
+    }
+
+    environment {
+        PATH = "C:\\Program Files\\nodejs;${env.PATH}"
     }
 
     stages {
@@ -16,16 +20,17 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
-                sh 'npx playwright install --with-deps'
+                bat 'npm ci'
+                bat 'npx playwright install'
             }
         }
 
         stage('Run Playwright Tests') {
             steps {
-                sh """
-                  URL='${params.URL}' \
-                  npx playwright test
+                bat """
+                    set URL=${params.URL}
+                    set TEXT=${params.TEXT}
+                    npx playwright test
                 """
             }
         }
