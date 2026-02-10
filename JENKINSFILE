@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS 18.10.0'
-    }
-
     parameters {
         string(name: 'URL', description: 'URL to open')
         string(name: 'TEXT', description: 'text to verify')
