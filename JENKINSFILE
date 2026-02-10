@@ -30,6 +30,7 @@ pipeline {
                 bat """
                     set URL=${params.URL}
                     set TEXT=${params.TEXT}
+                    set PLAYWRIGHT_DISABLE_COLORS=1
                     npx playwright test
                 """
             }
