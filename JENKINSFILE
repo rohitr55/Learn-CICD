@@ -4,6 +4,8 @@ pipeline {
     parameters {
         string(name: 'URL', description: 'URL to open')
         string(name: 'TEXT', description: 'Text to verify')
+        string(name: 'USERNAME', description: 'Enter the username' )
+        string(name: 'PASSWORD', description: 'Enter the password')
     }
 
     environment {
@@ -30,6 +32,8 @@ pipeline {
                 bat """
                     set URL=${params.URL}
                     set TEXT=${params.TEXT}
+                    set USERNAME=${params.USERNAME}
+                    set PASSWORD=${params.PASSWORD}
                     set PLAYWRIGHT_DISABLE_COLORS=1
                     npx playwright test
                 """
